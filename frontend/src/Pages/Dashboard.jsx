@@ -18,6 +18,7 @@ import { useTheme } from '../context/ThemeContext';
 const Dashboard = ({ userName = "User" }) => {
   const [greeting, setGreeting] = useState(getGreeting());
   const [tip, setTip] = useState(getRandomTip());
+  const [balance, setBalance] = useState(20340); // Initial balance
   const { isDarkMode, toggleDarkMode } = useTheme();
 
   // Update greeting every minute
@@ -126,7 +127,7 @@ const Dashboard = ({ userName = "User" }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <BalanceCard />
+            <BalanceCard balance={balance} />
           </motion.div>
 
           {/* Quick Actions Grid */}
@@ -137,7 +138,7 @@ const Dashboard = ({ userName = "User" }) => {
             transition={{ duration: 0.5, delay: 0.4 }}
           >
             <BudgetCard />
-            <SendRecieveCard />
+            <SendRecieveCard balance={balance} setBalance={setBalance} />
           </motion.div>
 
           {/* QR Section */}

@@ -1,15 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import zenpaylogo from '../assets/zenpaylogo.svg';
 import bgimg from '../assets/bgimg.jpg';
 import bgobject from '../assets/bgobject.png';
 import coin from '../assets/coin.png';
-import welcomebtn from '../assets/welcomebtn.png'; // Correct path to the button image
-import { ArrowRight } from 'lucide-react'; // Import the right arrow from lucide-react
+import { ArrowRight } from 'lucide-react';
 
 const Welcome = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="relative h-[100vh] w-full overflow-hidden">
-      
       {/* Background image */}
       <img 
         src={bgimg} 
@@ -48,28 +49,44 @@ const Welcome = () => {
         className="absolute top-[500px] right-[-50px] w-[100px] z-20 opacity-60 animate-float delay-500"
       />
 
-      {/* Heading with pulse */}
-      <h1
-        className="absolute top-1/2 mt-[105px] left-6 transform -translate-y-50 text-white z-30 text-left font-[Montserrat]"
-        style={{ fontSize: '50px', lineHeight: '58px', fontWeight: 600 }}
-      >
-        Empowering<br />
-        Your <span style={{ color: '#A6E22E', fontStyle: 'italic', fontWeight: 800 }}>Finances</span><br />
-        Simplifying<br />
-        Your Life.
-      </h1>
+      {/* Main content container */}
+      <div className="absolute inset-0 flex flex-col justify-center items-start px-8 z-30">
+        {/* Heading with pulse */}
+        <h1
+          className="text-white text-left font-[Montserrat] mb-6"
+          style={{ fontSize: '50px', lineHeight: '58px', fontWeight: 600 }}
+        >
+          Empowering<br />
+          Your <span style={{ color: '#A6E22E', fontStyle: 'italic', fontWeight: 800 }}>Finances</span><br />
+          Simplifying<br />
+          Your Life.
+        </h1>
 
-      {/* Paragraph below heading */}
-      <p className="absolute left-6 top-[calc(50%+200px)] z-40 text-white text-left font-light opacity-80 mb-5"
-        style={{ fontSize: '20px', lineHeight: '28px', fontWeight: 300, maxWidth: '400px', fontFamily: 'Montserrat' }}>
-        Secure your financial future with our banking services.
-      </p>
+        {/* Paragraph below heading */}
+        <p className="text-white text-left font-light opacity-80 mb-12 max-w-md"
+          style={{ fontSize: '20px', lineHeight: '28px', fontWeight: 300, fontFamily: 'Montserrat' }}>
+          Secure your financial future with our banking services.
+        </p>
 
-      {/* Welcome button at the bottom of the page with right arrow */}
-      <div className="absolute bottom-15 left-1/6 transform -translate-x-1/2 z-30 flex items-center justify-center" 
-           style={{ width: '80px', height: '80px', backgroundImage: `url(${welcomebtn})`, backgroundSize: 'cover' }}>
-        <ArrowRight color="white" size={54} />
+        {/* Navigation buttons */}
+        <div className="flex gap-4">
+          <button
+            onClick={() => navigate('/login')}
+            className="bg-[#A6E22E] text-white px-8 py-4 rounded-full font-medium hover:bg-[#8BC34A] transition-colors duration-300 flex items-center gap-2"
+          >
+            Get Started
+            <ArrowRight size={24} />
+          </button>
+          <button
+            onClick={() => navigate('/login')}
+            className="border-2 border-white text-white px-8 py-4 rounded-full font-medium hover:bg-white/10 transition-colors duration-300"
+          >
+            Learn More
+          </button>
+        </div>
       </div>
+
+      {/* Bottom decorative element */}
       <img 
         src={bgobject} 
         alt="Object" 

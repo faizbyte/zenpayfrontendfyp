@@ -1,5 +1,6 @@
 // src/pages/Login.js
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import zenpaylogo from '../assets/zenpaylogo.svg';
 import bgimg from '../assets/bgimg.jpg';
 import coin from '../assets/coin.png'; // Coin image path
@@ -9,6 +10,7 @@ import { useTheme } from '../context/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
   const [activeTab, setActiveTab] = useState('login');
   const [showPassword, setShowPassword] = useState(false);
@@ -30,6 +32,7 @@ const Login = () => {
     e.preventDefault();
     // TODO: Implement login logic
     console.log('Login attempt:', loginForm);
+    navigate('/dashboard');
   };
 
   // Use effect to show the popup after a delay
@@ -70,6 +73,7 @@ const Login = () => {
         />
         
         <motion.button
+          onClick={() => navigate('/')}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -250,54 +254,42 @@ const Login = () => {
                             <button
                               type="button"
                               onClick={() => setShowPassword(!showPassword)}
-                              className={isDarkMode ? 'text-gray-400' : 'text-gray-500'}
+                              className={`p-1 rounded-full hover:bg-opacity-10 ${
+                                isDarkMode ? 'hover:bg-white' : 'hover:bg-gray-800'
+                              }`}
                             >
-                              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                              {showPassword ? (
+                                <EyeOff size={20} className={isDarkMode ? 'text-gray-400' : 'text-gray-500'} />
+                              ) : (
+                                <Eye size={20} className={isDarkMode ? 'text-gray-400' : 'text-gray-500'} />
+                              )}
                             </button>
                           </div>
                         </div>
 
+                        {/* Login Button */}
+                        <button
+                          type="submit"
+                          className={`w-full py-4 rounded-xl font-medium transition-colors ${
+                            isDarkMode 
+                              ? 'bg-[#A6E22E] text-white hover:bg-[#8BC34A]' 
+                              : 'bg-[#005339] text-white hover:bg-[#003D2A]'
+                          }`}
+                        >
+                          Login
+                        </button>
+
                         {/* Forgot Password Link */}
-                        <div className="text-right">
+                        <div className="text-center">
                           <button
                             type="button"
                             className={`text-sm ${
-                              isDarkMode 
-                                ? 'text-[#A6E22E] hover:text-[#B6F23E]' 
-                                : 'text-[#005339] hover:text-[#006349]'
-                            }`}
+                              isDarkMode ? 'text-gray-400 hover:text-[#A6E22E]' : 'text-gray-600 hover:text-[#005339]'
+                            } transition-colors`}
                           >
                             Forgot Password?
                           </button>
                         </div>
-
-                        {/* Login Button */}
-                        <motion.button
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          type="submit"
-                          className={`w-full py-3.5 rounded-xl font-medium text-center transition-colors ${
-                            isDarkMode
-                              ? 'bg-[#A6E22E] text-gray-900 hover:bg-[#B6F23E]'
-                              : 'bg-[#005339] text-white hover:bg-[#006349]'
-                          }`}
-                        >
-                          Login to ZenPay
-                        </motion.button>
-
-                        {/* Terms and Privacy */}
-                        <p className={`text-center text-sm mt-6 ${
-                          isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                        }`}>
-                          By logging in, you agree to our{' '}
-                          <button className={`font-medium ${
-                            isDarkMode ? 'text-[#A6E22E]' : 'text-[#005339]'
-                          }`}>Terms</button>
-                          {' '}and{' '}
-                          <button className={`font-medium ${
-                            isDarkMode ? 'text-[#A6E22E]' : 'text-[#005339]'
-                          }`}>Privacy Policy</button>
-                        </p>
                       </form>
                     </motion.div>
                   )}
