@@ -4,11 +4,12 @@ Dashboard
 Login
 Register
 Welcome
-
-
-TO DO
 Transactions
 History
-Settings
-Profile 
 Routing
+
+TO DO
+
+Settings
+Profile
+
